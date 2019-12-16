@@ -1,0 +1,51 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="page-global">
+  <div class="mini-cadre">
+    <div class="title">
+      <H1 class="tontine">
+        <span> {{ title }} </span>
+      </H1>
+    </div>
+    <div class="addMember">
+      <!--<form action="/" method="post"> -->
+      <div class="zone">
+        <input
+            #newGear
+            (blur)="addMember(newGear.value); newGear.value='' "
+            (keyup.enter)="addMember(newGear.value); newGear.value=''"
+            name="membre"
+            placeholder="Nom du nouveau Membre"
+            required
+            type="text">
+        <button class ="ajout" (click)="addMember(newGear.value)">
+          Ajouter
+        </button>
+      </div>
+
+    </div>
+
+    <div class="soustitre">
+
+      <H3>
+        Liste de Membres
+
+      </H3>
+    </div>
+    <div class="Membres">
+      <ul>
+        <li *ngFor="let member of listOfMembers; let idx = index ">
+          <span>{{idx}}</span>
+          {{member.name}}
+          <button
+            class ="modif" type="button"> Edit </button>
+          <button class ="supp" (click) ="suppMember(idx)"
+                  type="button">Delete</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
+<router-outlet></router-outlet>
