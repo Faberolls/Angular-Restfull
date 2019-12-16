@@ -1,10 +1,10 @@
-// memberController.js
+// member-controller.js
 // Import member model
 // Handle index actions
-import {GetMember, Member, MemberModel} from "./memberModel";
+import {GetMember, Member, MemberModel} from "./member-model";
 
-export const Index = function (req, res) {
-    const limit: number = req.query.limit || 5;
+export const Index = (req, res) => {
+    const limit: string = req.query.limit || '5';
     GetMember(
         function (err, members) {
             if (err) {
@@ -19,11 +19,11 @@ export const Index = function (req, res) {
                 data: members
             });
         },
-        limit
+        Number.parseFloat(limit) || 5
     );
 };
 // Handle create Member actions
-export const NewMember = function (req, res) {
+export const NewMember = (req, res) => {
     let member: MemberModel = new Member();
     member.name = req.body.name ? req.body.name : member.name;
     member.cotisation = req.body.cotisation;
@@ -38,8 +38,8 @@ export const NewMember = function (req, res) {
     });
 };
 // Handle view member info
-export const ViewMember = function (req, res) {
-    Member.findById(req.params.member_id, function (err, member: MemberModel) {
+export const ViewMember = (req, res) => {
+    Member.findById(req.params.member_id, (err, member: MemberModel) => {
         if (err)
             res.send(err);
         res.json({
@@ -49,15 +49,15 @@ export const ViewMember = function (req, res) {
     });
 };
 // Handle update member info
-export const UpdateMember = function (req, res) {
-    Member.findById(req.params.member_id, function (err, member: MemberModel) {
+export const UpdateMember = (req, res) => {
+    Member.findById(req.params.member_id, (err, member: MemberModel) => {
         if (err) {
             res.send(err);
         }
         member.name = req.body.name ? req.body.name : member.name;
         member.cotisation = req.body.cotisation;
 // save the member and check for errors
-        member.save(function (err) {
+        member.save((err) => {
             if (err)
                 res.json(err);
             res.json({
@@ -68,7 +68,7 @@ export const UpdateMember = function (req, res) {
     });
 };
 // Handle delete contact
-export const DeleteMember = function (req, res) {
+export const DeleteMember = (req, res) => {
     Member.remove({
         _id: req.params.member_id
     }, function (err) {

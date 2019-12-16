@@ -1,6 +1,6 @@
 import *as express from 'express';
 // Import contact controller
-import * as memberController from './memberController';
+import * as memberController from './member-controller';
 
 // Initialize express router
 // Export API routes

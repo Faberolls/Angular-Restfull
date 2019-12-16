@@ -1,4 +1,4 @@
-// memberModel.js
+// member-model.js
 import * as mongoose from 'mongoose';
 // Setup schema
 export const MemberSchema: mongoose.Schema = new mongoose.Schema({
